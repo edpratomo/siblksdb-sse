@@ -19,8 +19,8 @@ set :deploy_to, '/home/apps/siblksdb-sse'
 # Default value for :log_level is :debug
 # set :log_level, :debug
 
-# Default value for :pty is false
-# set :pty, true
+# Default value for :pty is false ==>> this is for sudo
+set :pty, true
 
 # Default value for :linked_files is []
 # set :linked_files, fetch(:linked_files, []).push('config/database.yml')
@@ -35,6 +35,8 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids')
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :rvm1_ruby_version, "ruby-2.2.1"
+
 namespace :deploy do
 
   desc 'Restart application'
@@ -45,6 +47,8 @@ namespace :deploy do
       execute :sudo, "systemctl restart eventserver"
     end
   end
+
+  after :publishing, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
