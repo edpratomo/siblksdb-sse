@@ -13,5 +13,5 @@ threaded: true
 no-epoll: true
 daemonize: true
 port: 9292
-chdir: /home/apps/siblksdb-sse
+chdir: /home/apps/siblksdb-sse/current
 tag: eventserver
