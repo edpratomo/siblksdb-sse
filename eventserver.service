@@ -1,0 +1,21 @@
+# create systemd service file for sinatra startup
+# 0. rvm use 2.2.1
+# 1. rvm wrapper 2.2.1 bundle (see: rvm help wrapper)
+# 2. create /etc/systemd/system/eventserver.service
+# 3. systemctl enable webserver
+# 4. systemctl start webserver
+[Unit]
+Description=Event server for siblksdb
+
+[Service]
+Type=simple
+RemainAfterExit=yes
+User=apps
+PIDFile=/home/apps/siblksdb-sse/tmp/pids/thin.pid
+WorkingDirectory=/home/apps/siblksdb-sse
+ExecStart=/home/apps/.rvm/wrappers/ruby-2.2.1/bundle exec thin start -C config/thin.yml
+ExecStop=/home/apps/.rvm/wrappers/ruby-2.2.1/bundle exec thin stop -C config/thin.yml
+TimeoutSec=300
+
+[Install]
+WantedBy=multi-user.target
