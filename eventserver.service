@@ -13,8 +13,8 @@ RemainAfterExit=yes
 User=apps
 PIDFile=/home/apps/siblksdb-sse/current/tmp/pids/thin.pid
 WorkingDirectory=/home/apps/siblksdb-sse/current
-ExecStart=/home/apps/.rvm/wrappers/ruby-2.2.1/bundle exec thin start -C config/thin.yml
-ExecStop=/home/apps/.rvm/wrappers/ruby-2.2.1/bundle exec thin stop -C config/thin.yml
+ExecStart=/home/apps/.rvm/wrappers/ruby-2.2.1/bundle exec thin start -C config/production.yml
+ExecStop=/home/apps/.rvm/wrappers/ruby-2.2.1/bundle exec thin stop -C config/production.yml
 TimeoutSec=300
 
 [Install]
