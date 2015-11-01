@@ -12,29 +12,29 @@ class MyApp < Sinatra::Base
     "OK"
   end
 
-  get '/seat' do
-    # redis = EM::Hiredis.connect
+  get '/seat/:app_env' do
+    channel = "seat_#{params[:app_env]}"
     redis = EM::Hiredis::Client.new
     if request.sse?
       sse_stream do |out|
         out.callback do
           # puts "Stream closed from #{request.ip}"
-          redis.pubsub.punsubscribe('*')
+          redis.pubsub.unsubscribe(channel)
           redis.pubsub.close_connection
         end
 
-        redis.pubsub.psubscribe('*') do |channel,msg|
+        redis.pubsub.subscribe(channel) do |msg|
           out.push :data => msg
         end
       end
     else
       stream(:keep_open) do |out|
         out.callback do
-          redis.pubsub.punsubscribe('*')
+          redis.pubsub.unsubscribe(channel)
           redis.pubsub.close_connection
         end
 
-        redis.pubsub.psubscribe('*') do |channel,msg|
+        redis.pubsub.subscribe(channel) do |msg|
           out << msg
         end
       end  
