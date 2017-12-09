@@ -1,6 +1,6 @@
 user: apps
 group: apps
-pid: tmp/pids/thin.pid
+pid: /var/run/thin.pid
 timeout: 30
 wait: 30
 log: log/thin.log
