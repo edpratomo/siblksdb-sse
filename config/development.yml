@@ -1,5 +1,5 @@
-user: edwin
-group: edwin
+user: epratomo
+group: epratomo
 pid: tmp/pids/thin.pid
 timeout: 30
 wait: 30
@@ -13,5 +13,5 @@ threaded: true
 no-epoll: true
 daemonize: true
 port: 9292
-chdir: /home/edwin/proj/siblksdb-sse
+chdir: /home/epratomo/proj/siblksdb-sse
 tag: eventserver
